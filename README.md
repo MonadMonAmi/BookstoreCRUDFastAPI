@@ -1,7 +1,9 @@
 # BookstoreCRUDFastAPI
 CRUD for Bookstore written with FastAPI
 
-# Launch
+## Launch
+```
 pipenv shell
 pip install -r requirements.txt
 python main.py
+```

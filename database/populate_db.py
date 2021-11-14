@@ -2,7 +2,6 @@ from database.m2m_orm import engine
 
 
 def populate_db():
-
     list_scripts = (
         "database/create_aux_schema.sql",
         "database/source_data/02_populate_author.sql",
@@ -23,5 +22,3 @@ def populate_db():
                         con.execute(schema_statement + separator)
                 else:
                     con.execute(schema)
-
-    # with engine.connect() as con:
