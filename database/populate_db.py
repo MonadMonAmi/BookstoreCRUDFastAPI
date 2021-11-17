@@ -1,4 +1,4 @@
-from database.m2m_orm import engine
+from app.db import engine
 
 
 def populate_db():
@@ -11,13 +11,16 @@ def populate_db():
         "database/source_data/06_populate_bookauthor.sql",
         "database/copy_aux.sql",
     )
+    # To check that it's no duplicates
+    """SELECT name, count(id) AS c FROM store_author GROUP BY id HAVING c > 1;
+    SELECT title, count(id) AS c FROM store_book GROUP BY id HAVING c > 1;"""
 
     separator = ';'
     for script in list_scripts:
         with open(script) as f:
             schema = f.read()
             with engine.connect() as con:
-                if script in (list_scripts[0], list_scripts[-1]):
+                if script in (list_scripts[0], list_scripts[-1],):
                     for schema_statement in schema.split(separator):
                         con.execute(schema_statement + separator)
                 else:
