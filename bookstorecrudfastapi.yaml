@@ -1,0 +1,28 @@
+namespace: bookstorecrudfastapi
+bookstorecrudfastapi:
+  defines: runnable
+  metadata:
+    name: bookstorecrudfastapi
+    description: A FastAPI based CRUD application for a bookstore
+    icon: https://emojiapi.dev/api/v1/books.svg
+  containers:
+    bookstorecrudfastapi:
+      build: .
+  services:
+    main:
+      container: bookstorecrudfastapi
+      port: 8000
+      host-port: 8000
+      publish: false
+      protocol: TCP
+      description: Main port that the application is exposed on
+  connections:
+    database:
+      target: postgresql/db
+      service: postgres
+  variables:
+    database-url:
+      env: DATABASE_URL
+      type: string
+      description: Database connection string
+      value: <- connection-hostname("database")
